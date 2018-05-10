@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bitzo.bms.dao.UserDao">
+    <insert id="addUser">
+        insert into users (username, password, nickName, gender, age, email) values (#{username}, #{password}, #{nickName}, #{gender}, #{age}, #{email});
+    </insert>
+    <update id="updateUserInfo">
+        update users
+        <set>
+            <if test="password != null"> password = #{password},</if>
+            <if test="nickName != null"> nickName = #{nickName},</if>
+            <if test="email != null"> email = #{email},</if>
+            <if test="age != 0 and age != null"> age = #{age},</if>
+            <if test="gender != null"> gender = #{gender},</if>
+            <if test="avatar != null"> avatar = #{avatar},</if>
+            <if test="isActive != null"> isActive = #{isActive}</if>
+        </set>
+        where id = #{id}
+    </update>
+    <select id="queryUserById" resultType="cn.bitzo.bms.entity.User">
+      select * from users where id = #{id}
+    </select>
+    <select id="queryUserByUsername" resultType="cn.bitzo.bms.entity.User">
+      select * from users where username = #{username}
+    </select>
+    <select id="queryAllUsers" resultType="cn.bitzo.bms.entity.User">
+        select * from users
+    </select>
+    <select id="countAllUsers" resultType="java.lang.Integer">
+        select count(*) from users
+    </select>
+</mapper>

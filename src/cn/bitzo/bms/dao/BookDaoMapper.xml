@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bitzo.bms.dao.BookDao">
+    <insert id="addBook">
+        insert into books (isbn,bookName,author,price,publisher,img,number,margin) values (#{isbn},#{bookName},#{author},#{price},#{publisher},#{img},#{number},#{margin});
+    </insert>
+    <update id="updateBook">
+        update books
+        <set>
+            <if test="isbn != null"> isbn = #{isbn},</if>
+            <if test="bookName != null"> bookName = #{bookName},</if>
+            <if test="author != null"> author = #{author},</if>
+            <if test="price != null and price > 0"> price = #{price},</if>
+            <if test="publisher != null"> publisher = #{publisher},</if>
+            <if test="number != null and number > 0"> number = #{number},</if>
+            <if test="margin != null and margin > 0"> margin = #{margin},</if>
+            <if test="isActive != null"> isActive = #{isActive}</if>
+        </set>
+        where id = #{id}
+    </update>
+    <select id="queryAllBooks" resultType="cn.bitzo.bms.entity.Book">
+      select * from books
+    </select>
+    <select id="queryBookById" resultType="cn.bitzo.bms.entity.Book">
+      select * from books where id = #{id}
+    </select>
+    <select id="countAllBook">
+        select count(*) from books
+    </select>
+</mapper>

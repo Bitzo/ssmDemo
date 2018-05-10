@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bitzo.bms.dao.BorrowDao">
+
+    <resultMap id="myBorrow" type="cn.bitzo.bms.entity.Borrow">
+        <id property="id" column="id"/>
+        <result property="userId" column="userId"/>
+        <result property="bookId" column="bookId"/>
+        <result property="number" column="number"/>
+        <result property="borrowDate" column="borrowDate"/>
+        <result property="backDate" column="backDate"/>
+        <association property="user" javaType="cn.bitzo.bms.entity.User">
+            <id property="id" column="userId"/>
+            <result property="username" column="username"/>
+            <result property="nickName" column="nickName"/>
+        </association>
+        <association property="book" javaType="cn.bitzo.bms.entity.Book">
+            <id property="id" column="bookId"/>
+            <result property="isbn" column="isbn"/>
+            <result property="bookName" column="bookName"/>
+        </association>
+    </resultMap>
+    <select id="queryBorrowInfo" resultMap="myBorrow">
+      select
+      bi.id, bi.userId, bi.bookId,u.username,u.nickName,bk.isbn,bk.bookName,bi.number,bi.borrowDate,bi.backDate
+      from books bk,users u,borrowInfo bi
+      where bi.userId = u.id and bi.bookId = bk.id
+    </select>
+</mapper>

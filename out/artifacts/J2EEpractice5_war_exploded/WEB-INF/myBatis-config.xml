@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+
+    <mappers>
+        <mapper resource="cn/bitzo/bms/dao/UserDaoMapper.xml"/>
+        <mapper resource="cn/bitzo/bms/dao/BookDaoMapper.xml"/>
+        <mapper resource="cn/bitzo/bms/dao/BorrowDaoMapper.xml"/>
+    </mappers>
+</configuration>
